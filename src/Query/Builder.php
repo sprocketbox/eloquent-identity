@@ -1,6 +1,6 @@
 <?php
 
-namespace Sprocketbox\Eloquence\Query;
+namespace Sprocketbox\Eloquent\Identity\Query;
 
 use Closure;
 use Illuminate\Contracts\Support\Arrayable;
@@ -10,9 +10,9 @@ use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\BelongsToMany;
 use Illuminate\Support\Str;
-use Sprocketbox\Eloquence\Concerns\MapsIdentity;
-use Sprocketbox\Eloquence\Facades\Eloquence;
-use Sprocketbox\Eloquence\ModelIdentity;
+use Sprocketbox\Eloquent\Identity\Concerns\MapsIdentity;
+use Sprocketbox\Eloquent\Identity\Facades\Identity;
+use Sprocketbox\Eloquent\Identity\ModelIdentity;
 
 class Builder extends EloquentBuilder
 {
@@ -130,8 +130,8 @@ class Builder extends EloquentBuilder
             $identity = $this->model->getModelIdentity($id, $this->getConnection()->getName());
         }
 
-        if (Eloquence::hasIdentity($identity)) {
-            return Eloquence::getIdentity($identity);
+        if (Identity::hasIdentity($identity)) {
+            return Identity::getIdentity($identity);
         }
 
         return null;

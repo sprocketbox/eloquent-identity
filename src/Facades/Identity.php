@@ -1,14 +1,14 @@
 <?php
 
-namespace Sprocketbox\Eloquence\Facades;
+namespace Sprocketbox\Eloquent\Identity\Facades;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Support\Facades\Facade;
-use Sprocketbox\Eloquence\IdentityManager;
-use Sprocketbox\Eloquence\ModelIdentity;
+use Sprocketbox\Eloquent\Identity\IdentityManager;
+use Sprocketbox\Eloquent\Identity\ModelIdentity;
 
 /**
- * Eloquence Facade
+ * Identity Facade
  *
  * @method static IdentityManager getInstance()
  * @method static bool hasIdentity(ModelIdentity $identity)
@@ -17,12 +17,12 @@ use Sprocketbox\Eloquence\ModelIdentity;
  * @method static IdentityManager removeIdentity(ModelIdentity $identity)
  * @method static array allIdentities()
  *
- * @package Sprocketbox\Eloquence\Facades
+ * @package Sprocketbox\Eloquent\Identity\Facades
  */
-class Eloquence extends Facade
+class Identity extends Facade
 {
     protected static function getFacadeAccessor(): string
     {
-        return 'eloquence';
+        return 'eloquent.identity';
     }
 }

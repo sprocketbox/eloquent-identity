@@ -1,6 +1,6 @@
 <?php /** @noinspection PhpUndefinedMethodInspection */
 
-namespace Sprocketbox\Eloquence\Concerns;
+namespace Sprocketbox\Eloquent\Identity\Concerns;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
@@ -8,16 +8,16 @@ use Illuminate\Database\Eloquent\Relations\Relation;
 use Illuminate\Support\Facades\Date;
 use Laravel\Nova\Fields\BelongsToMany;
 use LogicException;
-use Sprocketbox\Eloquence\Facades\Eloquence;
-use Sprocketbox\Eloquence\ModelIdentity;
-use Sprocketbox\Eloquence\Query\Builder;
+use Sprocketbox\Eloquent\Identity\Facades\Identity;
+use Sprocketbox\Eloquent\Identity\ModelIdentity;
+use Sprocketbox\Eloquent\Identity\Query\Builder;
 
 /**
  * MapsIdentity
  *
  * This trait provides identity map functionality for Eloquent models.
  *
- * @package Sprocketbox\Eloquence\Concerns
+ * @package Sprocketbox\Eloquent\Identity\Concerns
  */
 trait MapsIdentity
 {
@@ -27,9 +27,9 @@ trait MapsIdentity
     public static function bootMapsIdentity(): void
     {
         // Add a deleted event so the identity is removed from the map
-        static::deleted(fn(Model $model) => Eloquence::removeIdentity($model->getModelIdentity()));
+        static::deleted(fn(Model $model) => Identity::removeIdentity($model->getModelIdentity()));
         // Add a created event so newly created models are stored
-        static::created(fn(Model $model) => Eloquence::storeIdentity($model->getModelIdentity(), $model));
+        static::created(fn(Model $model) => Identity::storeIdentity($model->getModelIdentity(), $model));
     }
 
     /**
@@ -52,8 +52,8 @@ trait MapsIdentity
         if ($key !== null) {
             $identity = $this->getModelIdentity($key, $connection);
 
-            if (Eloquence::hasIdentity($identity)) {
-                $model = Eloquence::getIdentity($identity);
+            if (Identity::hasIdentity($identity)) {
+                $model = Identity::getIdentity($identity);
                 /** @noinspection NullPointerExceptionInspection */
                 $this->updateModelAttributes($model, $attributes);
 
@@ -64,7 +64,7 @@ trait MapsIdentity
         $model = parent::newFromBuilder($attributes, $connection);
 
         if ($identity !== null) {
-            Eloquence::storeIdentity($model->getModelIdentity(), $model);
+            Identity::storeIdentity($model->getModelIdentity(), $model);
         }
 
         return $model;
@@ -76,7 +76,7 @@ trait MapsIdentity
      * @param null        $id
      * @param string|null $connection
      *
-     * @return \Sprocketbox\Eloquence\ModelIdentity
+     * @return \Sprocketbox\Eloquent\Identity\ModelIdentity
      */
     public function getModelIdentity($id = null, ?string $connection = null): ModelIdentity
     {
@@ -90,7 +90,7 @@ trait MapsIdentity
      *
      * @param \Illuminate\Database\Query\Builder $query
      *
-     * @return \Illuminate\Database\Eloquent\Builder|\Sprocketbox\Eloquence\Query\Builder|static
+     * @return \Illuminate\Database\Eloquent\Builder|\Sprocketbox\Eloquent\Identity\Query\Builder|static
      */
     public function newEloquentBuilder($query)
     {
@@ -187,8 +187,8 @@ trait MapsIdentity
             if (method_exists($related, 'getModelIdentity')) {
                 $identity = $related->getModelIdentity($this->getAttribute($relation->getForeignKeyName()));
 
-                if (Eloquence::hasIdentity($identity)) {
-                    return Eloquence::getIdentity($identity);
+                if (Identity::hasIdentity($identity)) {
+                    return Identity::getIdentity($identity);
                 }
             }
         }

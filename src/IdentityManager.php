@@ -1,27 +1,27 @@
 <?php
 
-namespace Sprocketbox\Eloquence;
+namespace Sprocketbox\Eloquent\Identity;
 
 use Illuminate\Database\Eloquent\Model;
 
 /**
  * Eloquence
  *
- * @package Sprocketbox\Eloquence
+ * @package Sprocketbox\Eloquent\Identity
  */
 class IdentityManager
 {
     /**
      * The current instance.
      *
-     * @var \Sprocketbox\Eloquence\IdentityManager
+     * @var \Sprocketbox\Eloquent\Identity\IdentityManager
      */
     protected static IdentityManager $instance;
 
     /**
      * Get the current Eloquence instance.
      *
-     * @return \Sprocketbox\Eloquence\IdentityManager
+     * @return \Sprocketbox\Eloquent\Identity\IdentityManager
      */
     public static function getInstance(): IdentityManager
     {
@@ -42,7 +42,7 @@ class IdentityManager
     /**
      * Check if the identity is already stored.
      *
-     * @param \Sprocketbox\Eloquence\ModelIdentity $identity
+     * @param \Sprocketbox\Eloquent\Identity\ModelIdentity $identity
      *
      * @return bool
      */
@@ -54,7 +54,7 @@ class IdentityManager
     /**
      * Get the stored model for the given identity.
      *
-     * @param \Sprocketbox\Eloquence\ModelIdentity $identity
+     * @param \Sprocketbox\Eloquent\Identity\ModelIdentity $identity
      *
      * @return \Illuminate\Database\Eloquent\Model|null
      */
@@ -66,8 +66,8 @@ class IdentityManager
     /**
      * Set the model for the current identity.
      *
-     * @param \Sprocketbox\Eloquence\ModelIdentity $identity
-     * @param \Illuminate\Database\Eloquent\Model  $model
+     * @param \Sprocketbox\Eloquent\Identity\ModelIdentity $identity
+     * @param \Illuminate\Database\Eloquent\Model          $model
      *
      * @return $this
      */
@@ -81,7 +81,7 @@ class IdentityManager
     /**
      * Remove a model from the identity map.
      *
-     * @param \Sprocketbox\Eloquence\ModelIdentity $identity
+     * @param \Sprocketbox\Eloquent\Identity\ModelIdentity $identity
      *
      * @return $this
      */
@@ -119,7 +119,7 @@ class IdentityManager
     /**
      * Turn the model identity into a string.
      *
-     * @param \Sprocketbox\Eloquence\ModelIdentity $identity
+     * @param \Sprocketbox\Eloquent\Identity\ModelIdentity $identity
      *
      * @return string
      */

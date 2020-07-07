@@ -1,8 +1,8 @@
-# Eloquence
-[![Latest Stable Version](https://poser.pugx.org/sprocketbox/eloquence/v/stable.png)](https://packagist.org/packages/sprocketbox/eloquence) 
-[![Latest Unstable Version](https://poser.pugx.org/sprocketbox/eloquence/v/unstable.png)](https://packagist.org/packages/sprocketbox/eloquence) 
-[![License](https://poser.pugx.org/sprocketbox/eloquence/license.png)](https://packagist.org/packages/sprocketbox/eloquence)
-[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sprocketbox/eloquence/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sprocketbox/eloquence/?branch=master)
+# Eloquent Identity
+[![Latest Stable Version](https://poser.pugx.org/sprocketbox/eloquent-identity/v/stable.png)](https://packagist.org/packages/sprocketbox/eloquent-identity) 
+[![Latest Unstable Version](https://poser.pugx.org/sprocketbox/eloquent-identity/v/unstable.png)](https://packagist.org/packages/sprocketbox/eloquent-identity) 
+[![License](https://poser.pugx.org/sprocketbox/eloquent-identity/license.png)](https://packagist.org/packages/sprocketbox/eloquent-identity)
+[![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sprocketbox/eloquent-identity/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sprocketbox/eloquent-identity/?branch=master)
 
 - **Laravel**: 7
 - **PHP**: 7.4+
@@ -10,8 +10,8 @@
 - **Author**: Ollie Read 
 - **Author Homepage**: https://sprocketbox.io
 
-Eloquence provides a cache on top of Eloquent that prevents multiple models being created for a single database row 
-using the Identity Map design pattern ([P of EAA](https://martinfowler.com/eaaCatalog/identityMap.html) [Wikipedia](https://en.wikipedia.org/wiki/Identity_map_pattern)).
+Eloquent identity provides a cache on top of Eloquent preventing multiple models being created for a single database row 
+using the Identity Map design pattern ([P of EAA](https://martinfowler.com/eaaCatalog/identityMap.html) & [Wikipedia](https://en.wikipedia.org/wiki/Identity_map_pattern)).
 
 #### Table of Contents
 
@@ -28,23 +28,23 @@ using the Identity Map design pattern ([P of EAA](https://martinfowler.com/eaaCa
 To install this package simply run the following command.
 
 ```
-composer require sprocketbox/eloquence
+composer require sprocketbox/eloquent-identity
 ```
 
 This package uses auto-discovery to register the service provider but if you'd rather do it manually, 
 the service provider is:
 
 ```
-Sprocketbox\Eloquence\ServiceProvider
+Sprocketbox\Eloquent\Identity\ServiceProvider
 ```
 
 There is no configuration required.
 
 ## Usage
-To make use of Eloquence on your models, add the following trait.
+To make use of the Eloquent identity map on your models, add the following trait.
 
 ```
-Sprocketbox\Eloquence\Concerns\MapsIdentity
+Sprocketbox\Eloquent\Identity\Concerns\MapsIdentity
 ```
 
 ### Finding
@@ -70,7 +70,7 @@ If a belongs to relationship is loaded (not belongs to many) without constraints
 called, the query will skip any model instances that already exist.
 
 ### Flushing
-If you wish to flush the cached models, call `flushIdentities()` on an instance of `IdentityManager`, or on the `Eloquence`
+If you wish to flush the cached models, call `flushIdentities()` on an instance of `IdentityManager`, or on the `Identity`
 facade.
 
 ## How
@@ -79,7 +79,7 @@ The `IdentityManager` stores an array containing all existing model instances an
 The identities for models are stored as string, created using the following class.
 
 ```
-Sprocketbox\Eloquence\ModelIdentity
+Sprocketbox\Eloquent\Identity\ModelIdentity
 ```
 
 This contains a key, the model class name, and the connection name. The string version of these looks like so:
@@ -92,6 +92,6 @@ connection:class:key
 It's very easy to end up with multiple versions of the same model, meaning that updates on one aren't persisted
 to others.
 
-Eloquence was created to reduce the number of models created, help limit unnecessary queries, and allow for consistent
+Eloquent identity was created to reduce the number of models created, help limit unnecessary queries, and allow for consistent
 model interaction. It doesn't matter where in your code you're dealing with user 1, any changes made during a request
 will persist across all instances.
