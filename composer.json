@@ -20,14 +20,9 @@
       "Sprocketbox\\Eloquent\\Identity\\": "src/"
     }
   },
-  "autoload-dev": {
-    "psr-4": {
-      "Sprocketbox\\Eloquent\\Identity\\Tests\\": "tests/"
-    }
-  },
   "require": {
     "php": "^7.4",
-    "laravel/framework": "^7.0"
+    "laravel/framework": "^7 || ^8"
   },
   "extra": {
     "laravel": {
