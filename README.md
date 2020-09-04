@@ -4,7 +4,7 @@
 [![License](https://poser.pugx.org/sprocketbox/eloquent-identity/license.png)](https://packagist.org/packages/sprocketbox/eloquent-identity)
 [![Scrutinizer Code Quality](https://scrutinizer-ci.com/g/sprocketbox/eloquent-identity/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/sprocketbox/eloquent-identity/?branch=master)
 
-- **Laravel**: 7
+- **Laravel**: 7+
 - **PHP**: 7.4+
 - **License**: MIT
 - **Author**: Ollie Read 
